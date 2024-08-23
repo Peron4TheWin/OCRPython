@@ -1,5 +1,6 @@
 from flask import Flask,request
 from paddleocr import PaddleOCR
+from gevent.pywsgi import WSGIServer
 ocr = PaddleOCR(lang='es', show_log=False)
 app = Flask(__name__)
 
@@ -21,4 +22,6 @@ def imageToText(img):
         return ["none"]
 
 if __name__ == '__main__':
-    app.run()
+    http_server = WSGIServer(('', 9123), app)
+    http_server.serve_forever()
+
