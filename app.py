@@ -7,9 +7,9 @@ app = Flask(__name__)
 def test():
     file = request.files['image']
     file.save(file.filename)
-    return ImageToText(file.filename)
+    return imageToText(file.filename)
 
-def ImageToText(img):
+def imageToText(img):
     try:
         result = ocr.ocr(img, cls=True)
         string = []
